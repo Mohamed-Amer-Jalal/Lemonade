@@ -53,9 +53,6 @@ class MainActivity : ComponentActivity() {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LemonadeApp() {
-    var currentStep by remember { mutableIntStateOf(1) }
-    var squeezeCount by remember { mutableIntStateOf(0) }
-
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
@@ -71,49 +68,61 @@ fun LemonadeApp() {
             )
         }
     ) { innerPadding ->
-        Surface(
+        LemonadeScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding)
-                .background(MaterialTheme.colorScheme.tertiaryContainer),
-            color = MaterialTheme.colorScheme.background
-        ) {
-            when (currentStep) {
-                1 -> {
-                    LemonTextAndImage(
-                        onImageClick = { currentStep = 2.also { squeezeCount = (2..4).random() } },
-                        drawableResourceId = R.drawable.lemon_tree,
-                        textLabelResourceId = R.string.lemon_select,
-                        contentDescriptionResourceId = R.string.lemon_tree_content_description,
-                    )
-                }
+                .background(MaterialTheme.colorScheme.background)
+        )
+    }
+}
 
-                2 -> {
-                    LemonTextAndImage(
-                        onImageClick = { if (squeezeCount-- == 0) currentStep = 3 },
-                        drawableResourceId = R.drawable.lemon_squeeze,
-                        textLabelResourceId = R.string.lemon_squeeze,
-                        contentDescriptionResourceId = R.string.lemon_content_description,
-                    )
-                }
+@Composable
+fun LemonadeScreen(
+    modifier: Modifier = Modifier
+) {
+    var currentStep by remember { mutableIntStateOf(1) }
+    var squeezeCount by remember { mutableIntStateOf(0) }
 
-                3 -> {
-                    LemonTextAndImage(
-                        onImageClick = { currentStep = 4 },
-                        drawableResourceId = R.drawable.lemon_drink,
-                        textLabelResourceId = R.string.lemon_drink,
-                        contentDescriptionResourceId = R.string.lemonade_content_description,
-                    )
-                }
+    Surface(
+        modifier = modifier,
+        color = MaterialTheme.colorScheme.background
+    ) {
+        when (currentStep) {
+            1 -> {
+                LemonTextAndImage(
+                    onImageClick = { currentStep = 2.also { squeezeCount = (2..4).random() } },
+                    drawableResourceId = R.drawable.lemon_tree,
+                    textLabelResourceId = R.string.lemon_select,
+                    contentDescriptionResourceId = R.string.lemon_tree_content_description,
+                )
+            }
 
-                4 -> {
-                    LemonTextAndImage(
-                        onImageClick = { currentStep = 1 },
-                        drawableResourceId = R.drawable.lemon_restart,
-                        textLabelResourceId = R.string.lemon_empty_glass,
-                        contentDescriptionResourceId = R.string.empty_glass_content_description
-                    )
-                }
+            2 -> {
+                LemonTextAndImage(
+                    onImageClick = { if (squeezeCount-- == 0) currentStep = 3 },
+                    drawableResourceId = R.drawable.lemon_squeeze,
+                    textLabelResourceId = R.string.lemon_squeeze,
+                    contentDescriptionResourceId = R.string.lemon_content_description,
+                )
+            }
+
+            3 -> {
+                LemonTextAndImage(
+                    onImageClick = { currentStep = 4 },
+                    drawableResourceId = R.drawable.lemon_drink,
+                    textLabelResourceId = R.string.lemon_drink,
+                    contentDescriptionResourceId = R.string.lemonade_content_description,
+                )
+            }
+
+            4 -> {
+                LemonTextAndImage(
+                    onImageClick = { currentStep = 1 },
+                    drawableResourceId = R.drawable.lemon_restart,
+                    textLabelResourceId = R.string.lemon_empty_glass,
+                    contentDescriptionResourceId = R.string.empty_glass_content_description
+                )
             }
         }
     }
