@@ -167,7 +167,7 @@ fun LemonTextAndImage(
     }
 }
 
-@Preview
+@Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun LemonPreview() {
     LemonadeApp()
