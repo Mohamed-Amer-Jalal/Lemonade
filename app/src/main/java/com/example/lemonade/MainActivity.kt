@@ -7,7 +7,6 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -86,7 +85,7 @@ fun LemonadeScreen(
 
     Surface(
         modifier = modifier,
-        color = MaterialTheme.colorScheme.background
+        color = MaterialTheme.colorScheme.surfaceContainerLow
     ) {
         when (currentStep) {
             1 -> {
@@ -136,34 +135,30 @@ fun LemonTextAndImage(
     textLabelResourceId: Int,
     modifier: Modifier = Modifier
 ) {
-    Box(
-        modifier = modifier
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center,
+        modifier = modifier.fillMaxSize()
     ) {
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center,
-            modifier = modifier.fillMaxSize()
+        Button(
+            onClick = onImageClick,
+            shape = RoundedCornerShape(40.dp),
+            colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.tertiaryContainer)
         ) {
-            Button(
-                onClick = onImageClick,
-                shape = RoundedCornerShape(40.dp),
-                colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.tertiaryContainer)
-            ) {
-                Image(
-                    painter = painterResource(drawableResourceId),
-                    contentDescription = stringResource(contentDescriptionResourceId),
-                    modifier = Modifier
-                        .width(128.dp)
-                        .height(160.dp)
-                        .padding(24.dp)
-                )
-            }
-            Spacer(modifier = modifier.height(32.dp))
-            Text(
-                text = stringResource(textLabelResourceId),
-                style = MaterialTheme.typography.bodyLarge
+            Image(
+                painter = painterResource(drawableResourceId),
+                contentDescription = stringResource(contentDescriptionResourceId),
+                modifier = Modifier
+                    .width(128.dp)
+                    .height(160.dp)
+                    .padding(24.dp)
             )
         }
+        Spacer(modifier = modifier.height(32.dp))
+        Text(
+            text = stringResource(textLabelResourceId),
+            style = MaterialTheme.typography.bodyLarge
+        )
     }
 }
 
