@@ -20,7 +20,6 @@ import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
@@ -78,9 +77,10 @@ fun LemonadeScreen(
     var currentStep by remember { mutableIntStateOf(1) }
     var squeezeCount by remember { mutableIntStateOf(0) }
 
-    Surface(
-        modifier = modifier,
-        color = MaterialTheme.colorScheme.surfaceContainerLow
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center,
+        modifier = modifier.fillMaxSize()
     ) {
         when (currentStep) {
             1 -> {
@@ -128,33 +128,26 @@ fun LemonTextAndImage(
     drawableResourceId: Int,
     contentDescriptionResourceId: Int,
     textLabelResourceId: Int,
-    modifier: Modifier = Modifier
 ) {
-    Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center,
-        modifier = modifier.fillMaxSize()
+    Button(
+        onClick = onImageClick,
+        shape = RoundedCornerShape(40.dp),
+        colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.tertiaryContainer)
     ) {
-        Button(
-            onClick = onImageClick,
-            shape = RoundedCornerShape(40.dp),
-            colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.tertiaryContainer)
-        ) {
-            Image(
-                painter = painterResource(drawableResourceId),
-                contentDescription = stringResource(contentDescriptionResourceId),
-                modifier = Modifier
-                    .width(128.dp)
-                    .height(160.dp)
-                    .padding(24.dp)
-            )
-        }
-        Spacer(modifier = modifier.height(32.dp))
-        Text(
-            text = stringResource(textLabelResourceId),
-            style = MaterialTheme.typography.bodyLarge
+        Image(
+            painter = painterResource(drawableResourceId),
+            contentDescription = stringResource(contentDescriptionResourceId),
+            modifier = Modifier
+                .width(128.dp)
+                .height(160.dp)
+                .padding(24.dp)
         )
     }
+    Spacer(modifier = Modifier.height(32.dp))
+    Text(
+        text = stringResource(textLabelResourceId),
+        style = MaterialTheme.typography.bodyLarge
+    )
 }
 
 @Preview(showBackground = true, showSystemUi = true)
