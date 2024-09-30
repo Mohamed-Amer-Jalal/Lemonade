@@ -25,7 +25,7 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -74,8 +74,8 @@ fun LemonadeApp() {
 fun LemonadeScreen(
     modifier: Modifier = Modifier
 ) {
-    var currentStep by remember { mutableIntStateOf(1) }
-    var squeezeCount by remember { mutableIntStateOf(0) }
+    var currentStep by rememberSaveable { mutableIntStateOf(1) }
+    var squeezeCount by rememberSaveable { mutableIntStateOf(0) }
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
