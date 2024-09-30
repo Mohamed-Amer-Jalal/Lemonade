@@ -56,10 +56,7 @@ fun LemonadeApp() {
         topBar = {
             CenterAlignedTopAppBar(
                 title = {
-                    Text(
-                        text = "Lemonade",
-                        fontWeight = FontWeight.Bold
-                    )
+                    Text(text = "Lemonade", fontWeight = FontWeight.Bold)
                 },
                 colors = TopAppBarDefaults.largeTopAppBarColors(
                     containerColor = MaterialTheme.colorScheme.primaryContainer
