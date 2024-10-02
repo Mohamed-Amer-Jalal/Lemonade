@@ -9,6 +9,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -57,7 +58,8 @@ fun LemonadeApp() {
                 title = { Text(text = "Lemonade", fontWeight = FontWeight.Bold) },
                 colors = TopAppBarDefaults.largeTopAppBarColors(
                     containerColor = MaterialTheme.colorScheme.primaryContainer
-                )
+                ),
+                modifier = Modifier.fillMaxHeight(0.08f)
             )
         }
     ) { innerPadding ->
@@ -129,6 +131,18 @@ fun LemonTextAndImage(
     contentDescriptionResourceId: Int,
     textLabelResourceId: Int,
 ) {
+//    Image(
+//        painter = painterResource(drawableResourceId),
+//        contentDescription = stringResource(contentDescriptionResourceId),
+//        modifier = Modifier
+//            .width(148.dp)
+//            .height(180.dp)
+//            .clip(RoundedCornerShape(40.dp))
+//            .background(MaterialTheme.colorScheme.tertiaryContainer)
+//            .clickable(onClick = onImageClick)
+//            .padding(24.dp)
+//    )
+
     Button(
         onClick = onImageClick,
         shape = RoundedCornerShape(40.dp),
