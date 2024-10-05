@@ -51,15 +51,13 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun LemonadeApp() {
     Scaffold(
-        topBar = {
-            TopBar()
-        }
+        topBar = { TopBar() }
     ) { innerPadding ->
         LemonadeScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding)
-                .background(MaterialTheme.colorScheme.background)
+                .background(color = MaterialTheme.colorScheme.background)
         )
     }
 }
@@ -77,9 +75,7 @@ fun TopBar() {
 }
 
 @Composable
-fun LemonadeScreen(
-    modifier: Modifier = Modifier
-) {
+fun LemonadeScreen(modifier: Modifier = Modifier) {
     var currentStep by rememberSaveable { mutableIntStateOf(1) }
     var squeezeCount by rememberSaveable { mutableIntStateOf(0) }
 
@@ -94,7 +90,7 @@ fun LemonadeScreen(
                     onImageClick = { currentStep = 2.also { squeezeCount = (2..4).random() } },
                     drawableResourceId = R.drawable.lemon_tree,
                     textLabelResourceId = R.string.lemon_select,
-                    contentDescriptionResourceId = R.string.lemon_tree_content_description,
+                    contentDescriptionResourceId = R.string.lemon_tree_content_description
                 )
             }
 
@@ -103,7 +99,7 @@ fun LemonadeScreen(
                     onImageClick = { if (squeezeCount-- == 0) currentStep = 3 },
                     drawableResourceId = R.drawable.lemon_squeeze,
                     textLabelResourceId = R.string.lemon_squeeze,
-                    contentDescriptionResourceId = R.string.lemon_content_description,
+                    contentDescriptionResourceId = R.string.lemon_content_description
                 )
             }
 
@@ -112,7 +108,7 @@ fun LemonadeScreen(
                     onImageClick = { currentStep = 4 },
                     drawableResourceId = R.drawable.lemon_drink,
                     textLabelResourceId = R.string.lemon_drink,
-                    contentDescriptionResourceId = R.string.lemonade_content_description,
+                    contentDescriptionResourceId = R.string.lemonade_content_description
                 )
             }
 
@@ -133,7 +129,7 @@ fun LemonTextAndImage(
     onImageClick: () -> Unit,
     drawableResourceId: Int,
     contentDescriptionResourceId: Int,
-    textLabelResourceId: Int,
+    textLabelResourceId: Int
 ) {
     Button(
         onClick = onImageClick,
