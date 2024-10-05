@@ -155,5 +155,15 @@ fun LemonTextAndImage(
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun LemonPreview() {
-    LemonadeApp()
+    LemonadeTheme(darkTheme = false) {
+        LemonadeApp()
+    }
+}
+
+@Preview(showBackground = true, showSystemUi = true)
+@Composable
+fun LemonPreviewDark() {
+    LemonadeTheme(darkTheme = true) {
+        LemonadeApp()
+    }
 }
