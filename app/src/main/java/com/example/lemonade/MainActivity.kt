@@ -23,10 +23,6 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -75,52 +71,16 @@ fun TopBar() {
 }
 
 @Composable
-fun LemonadeScreen(modifier: Modifier = Modifier) {
-    var currentStep by rememberSaveable { mutableIntStateOf(1) }
-    var squeezeCount by rememberSaveable { mutableIntStateOf(0) }
-
+fun LemonadeScreen(
+    modifier: Modifier = Modifier,
+    viewModel: LemonadeViewModel = LemonadeViewModel()
+) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
         modifier = modifier.fillMaxSize()
     ) {
-        when (currentStep) {
-            1 -> {
-                LemonTextAndImage(
-                    onImageClick = { currentStep = 2.also { squeezeCount = (2..4).random() } },
-                    drawableResourceId = R.drawable.lemon_tree,
-                    textLabelResourceId = R.string.lemon_select,
-                    contentDescriptionResourceId = R.string.lemon_tree_content_description
-                )
-            }
-
-            2 -> {
-                LemonTextAndImage(
-                    onImageClick = { if (squeezeCount-- == 0) currentStep = 3 },
-                    drawableResourceId = R.drawable.lemon_squeeze,
-                    textLabelResourceId = R.string.lemon_squeeze,
-                    contentDescriptionResourceId = R.string.lemon_content_description
-                )
-            }
-
-            3 -> {
-                LemonTextAndImage(
-                    onImageClick = { currentStep = 4 },
-                    drawableResourceId = R.drawable.lemon_drink,
-                    textLabelResourceId = R.string.lemon_drink,
-                    contentDescriptionResourceId = R.string.lemonade_content_description
-                )
-            }
-
-            4 -> {
-                LemonTextAndImage(
-                    onImageClick = { currentStep = 1 },
-                    drawableResourceId = R.drawable.lemon_restart,
-                    textLabelResourceId = R.string.lemon_empty_glass,
-                    contentDescriptionResourceId = R.string.empty_glass_content_description
-                )
-            }
-        }
+        viewModel.OnImageClicked()
     }
 }
 
