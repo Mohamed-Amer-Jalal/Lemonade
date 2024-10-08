@@ -1,20 +1,17 @@
 package com.example.lemonade
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.State
-import androidx.compose.runtime.asIntState
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.lifecycle.ViewModel
 
 class LemonadeViewModel : ViewModel() {
     private val _currentStep = mutableIntStateOf(1)
-    val currentStep: State<Int> = _currentStep.asIntState()
 
     private val _squeezeCount = mutableIntStateOf(0)
 
     @Composable
     fun OnImageClicked() {
-        when (currentStep.value) {
+        when (_currentStep.intValue) {
             1 -> LemonTextAndImage(
                 onImageClick = {
                     _currentStep.intValue = 2.also { _squeezeCount.intValue = (2..4).random() }
