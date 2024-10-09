@@ -65,6 +65,7 @@ fun LemonadeScreen(
         verticalArrangement = Arrangement.Center,
         modifier = modifier.fillMaxSize()
     ) {
+        // Call LemonTextAndImage once with the determined parameters
         viewModel.OnImageClicked()
     }
 }
