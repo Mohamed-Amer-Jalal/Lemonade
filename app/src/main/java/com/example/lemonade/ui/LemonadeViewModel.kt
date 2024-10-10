@@ -14,8 +14,7 @@ class LemonadeViewModel : ViewModel() {
     // Function to get the current Lemonade state
     @Composable
     fun LemonadeState() {
-
-        val lemonade = when (_currentStep.intValue) {
+        val lemonadeState = when (_currentStep.intValue) {
             1 -> Lemonade(
                 drawableResourceId = R.drawable.lemon_tree,
                 textLabelResourceId = R.string.lemon_select,
@@ -44,14 +43,9 @@ class LemonadeViewModel : ViewModel() {
                 onImageClick = { _currentStep.intValue = 1 }
             )
 
-            else -> Lemonade(
-                drawableResourceId = R.drawable.lemon_tree,
-                textLabelResourceId = R.string.lemon_select,
-                contentDescriptionResourceId = R.string.lemon_tree_content_description,
-                onImageClick = { }
-            )
+            else -> {}
         }
-
-        LemonTextAndImage(lemonade)
+        LemonTextAndImage(lemonadeState as Lemonade)
     }
+
 }
