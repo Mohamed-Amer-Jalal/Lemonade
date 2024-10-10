@@ -5,14 +5,10 @@ import androidx.compose.runtime.collectAsState
 import androidx.lifecycle.ViewModel
 import com.example.lemonade.R
 import com.example.lemonade.ui.data.Lemonade
-import com.example.lemonade.ui.data.LemonadeState
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
 
 class LemonadeViewModel : ViewModel() {
-    private val _uiState = MutableStateFlow(LemonadeState())
-    val uiState: StateFlow<LemonadeState> = _uiState.asStateFlow()
+    private val _uiState = MutableStateFlow(LemonadeUiState())
 
     fun pickLemon() {
         _uiState.value = _uiState.value.copy(
