@@ -66,7 +66,7 @@ fun LemonadeScreen(
         verticalArrangement = Arrangement.Center,
         modifier = modifier.fillMaxSize()
     ) {
-        viewModel.LemonadeState()
+        viewModel.OnLemonadeState()
     }
 }
 

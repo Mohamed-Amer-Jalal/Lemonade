@@ -1,51 +1,82 @@
 package com.example.lemonade.ui
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.collectAsState
 import androidx.lifecycle.ViewModel
 import com.example.lemonade.R
 import com.example.lemonade.ui.data.Lemonade
+import com.example.lemonade.ui.data.LemonadeState
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 
 class LemonadeViewModel : ViewModel() {
-    private val _currentStep = mutableIntStateOf(1)
+    private val _uiState = MutableStateFlow(LemonadeState())
+    val uiState: StateFlow<LemonadeState> = _uiState.asStateFlow()
 
-    private val _squeezeCount = mutableIntStateOf(0)
+    fun pickLemon() {
+        _uiState.value = _uiState.value.copy(
+            currentStep = 2,
+            squeezeCount = (2..4).random()
+        )
+    }
 
-    // Function to get the current Lemonade state
+    fun squeezeLemon() {
+        val newSqueezeCount = _uiState.value.squeezeCount - 1
+        if (newSqueezeCount > 0) {
+            _uiState.value = _uiState.value.copy(squeezeCount = newSqueezeCount)
+        } else {
+            _uiState.value = _uiState.value.copy(currentStep = 3)
+        }
+    }
+
+    fun drinkLemonade() {
+        _uiState.value = _uiState.value.copy(currentStep = 4)
+    }
+
+    fun restart() {
+        _uiState.value = _uiState.value.copy(currentStep = 1, squeezeCount = 0)
+    }
+
     @Composable
-    fun LemonadeState() {
-        val lemonadeState = when (_currentStep.intValue) {
+    fun OnLemonadeState() {
+        // Collecting the current state from the StateFlow
+        val lemonadeState = _uiState.collectAsState()
+
+        val lemonade = when (lemonadeState.value.currentStep) {
             1 -> Lemonade(
                 drawableResourceId = R.drawable.lemon_tree,
                 textLabelResourceId = R.string.lemon_select,
                 contentDescriptionResourceId = R.string.lemon_tree_content_description,
-                onImageClick = { _currentStep.intValue = 2.also { _squeezeCount.intValue = (2..4).random() } }
+                onImageClick = { pickLemon() }
             )
 
             2 -> Lemonade(
                 drawableResourceId = R.drawable.lemon_squeeze,
                 textLabelResourceId = R.string.lemon_squeeze,
                 contentDescriptionResourceId = R.string.lemon_content_description,
-                onImageClick = { if (_squeezeCount.intValue-- <= 0) _currentStep.intValue = 3 }
+                onImageClick = { squeezeLemon() }
             )
 
             3 -> Lemonade(
                 drawableResourceId = R.drawable.lemon_drink,
                 textLabelResourceId = R.string.lemon_drink,
                 contentDescriptionResourceId = R.string.lemonade_content_description,
-                onImageClick = { _currentStep.intValue = 4 }
+                onImageClick = { drinkLemonade() }
             )
 
             4 -> Lemonade(
                 drawableResourceId = R.drawable.lemon_restart,
                 textLabelResourceId = R.string.lemon_empty_glass,
                 contentDescriptionResourceId = R.string.empty_glass_content_description,
-                onImageClick = { _currentStep.intValue = 1 }
+                onImageClick = { restart() }
             )
 
-            else -> {}
+            else -> null // Handle unexpected states if needed
         }
-        LemonTextAndImage(lemonadeState as Lemonade)
-    }
 
+        lemonade?.let {
+            LemonTextAndImage(it)
+        }
+    }
 }
