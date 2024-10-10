@@ -27,6 +27,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.lemonade.R
+import com.example.lemonade.ui.data.Lemonade
 import com.example.lemonade.ui.theme.LemonadeTheme
 
 @Composable
@@ -65,26 +66,22 @@ fun LemonadeScreen(
         verticalArrangement = Arrangement.Center,
         modifier = modifier.fillMaxSize()
     ) {
-        // Call LemonTextAndImage once with the determined parameters
-        viewModel.OnImageClicked()
+        viewModel.LemonadeState()
     }
 }
 
 @Composable
 fun LemonTextAndImage(
-    onImageClick: () -> Unit,
-    drawableResourceId: Int,
-    contentDescriptionResourceId: Int,
-    textLabelResourceId: Int
+    lemonade: Lemonade,
 ) {
     Button(
-        onClick = onImageClick,
+        onClick = lemonade.onImageClick,
         shape = RoundedCornerShape(dimensionResource(R.dimen.button_corner_radius)),
         colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primaryContainer)
     ) {
         Image(
-            painter = painterResource(drawableResourceId),
-            contentDescription = stringResource(contentDescriptionResourceId),
+            painter = painterResource(lemonade.drawableResourceId),
+            contentDescription = stringResource(lemonade.contentDescriptionResourceId),
             modifier = Modifier
                 .width(dimensionResource(R.dimen.button_image_width))
                 .height(dimensionResource(R.dimen.button_image_height))
@@ -93,7 +90,7 @@ fun LemonTextAndImage(
     }
     Spacer(modifier = Modifier.height(dimensionResource(R.dimen.padding_vertical)))
     Text(
-        text = stringResource(textLabelResourceId),
+        text = stringResource(lemonade.textLabelResourceId),
         style = MaterialTheme.typography.bodyLarge
     )
 }
