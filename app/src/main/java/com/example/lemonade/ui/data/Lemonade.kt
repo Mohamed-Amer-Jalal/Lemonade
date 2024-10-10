@@ -9,3 +9,8 @@ data class Lemonade(
     @StringRes val contentDescriptionResourceId: Int,
     val onImageClick: () -> Unit
 )
+
+data class LemonadeState(
+    val currentStep: Int = 1,
+    val squeezeCount: Int = 0
+)

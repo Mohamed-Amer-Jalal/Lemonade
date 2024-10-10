@@ -7,27 +7,19 @@ import com.example.lemonade.R
 import com.example.lemonade.ui.data.Lemonade
 import com.example.lemonade.ui.data.LemonadeState
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
 
 class LemonadeViewModel : ViewModel() {
     private val _uiState = MutableStateFlow(LemonadeState())
-    val uiState: StateFlow<LemonadeState> = _uiState.asStateFlow()
 
     fun pickLemon() {
-        _uiState.value = _uiState.value.copy(
-            currentStep = 2,
-            squeezeCount = (2..4).random()
-        )
+        _uiState.value = _uiState.value.copy(currentStep = 2, squeezeCount = (2..4).random())
     }
 
     fun squeezeLemon() {
-        val newSqueezeCount = _uiState.value.squeezeCount - 1
-        if (newSqueezeCount > 0) {
-            _uiState.value = _uiState.value.copy(squeezeCount = newSqueezeCount)
-        } else {
-            _uiState.value = _uiState.value.copy(currentStep = 3)
-        }
+        val squeezeCount = _uiState.value.squeezeCount - 1
+
+        if (squeezeCount > 0) _uiState.value = _uiState.value.copy(squeezeCount = squeezeCount)
+        else _uiState.value = _uiState.value.copy(currentStep = 3)
     }
 
     fun drinkLemonade() {
@@ -75,8 +67,8 @@ class LemonadeViewModel : ViewModel() {
             else -> null // Handle unexpected states if needed
         }
 
-        lemonade?.let {
-            LemonTextAndImage(it)
+        lemonade?.let { lemonade ->
+            LemonTextAndImage(lemonade)
         }
     }
 }

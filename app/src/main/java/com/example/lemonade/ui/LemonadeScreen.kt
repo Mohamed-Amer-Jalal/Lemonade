@@ -66,6 +66,7 @@ fun LemonadeScreen(
         verticalArrangement = Arrangement.Center,
         modifier = modifier.fillMaxSize()
     ) {
+        // Call the ViewModel function to render the current state
         viewModel.OnLemonadeState()
     }
 }
