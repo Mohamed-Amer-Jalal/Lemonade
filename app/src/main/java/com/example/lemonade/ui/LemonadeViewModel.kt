@@ -36,32 +36,28 @@ class LemonadeViewModel : ViewModel() {
 
         val lemonade = when (lemonadeState.value.currentStep) {
             1 -> Lemonade(
-                drawableResourceId = R.drawable.lemon_tree,
-                textLabelResourceId = R.string.lemon_select,
-                contentDescriptionResourceId = R.string.lemon_tree_content_description,
-                onImageClick = { pickLemon() }
-            )
+                R.drawable.lemon_tree,
+                R.string.lemon_select,
+                R.string.lemon_tree_content_description
+            ) { pickLemon() }
 
             2 -> Lemonade(
-                drawableResourceId = R.drawable.lemon_squeeze,
-                textLabelResourceId = R.string.lemon_squeeze,
-                contentDescriptionResourceId = R.string.lemon_content_description,
-                onImageClick = { squeezeLemon() }
-            )
+                R.drawable.lemon_squeeze,
+                R.string.lemon_squeeze,
+                R.string.lemon_content_description
+            ) { squeezeLemon() }
 
             3 -> Lemonade(
-                drawableResourceId = R.drawable.lemon_drink,
-                textLabelResourceId = R.string.lemon_drink,
-                contentDescriptionResourceId = R.string.lemonade_content_description,
-                onImageClick = { drinkLemonade() }
-            )
+                R.drawable.lemon_drink,
+                R.string.lemon_drink,
+                R.string.lemonade_content_description
+            ) { drinkLemonade() }
 
             4 -> Lemonade(
-                drawableResourceId = R.drawable.lemon_restart,
-                textLabelResourceId = R.string.lemon_empty_glass,
-                contentDescriptionResourceId = R.string.empty_glass_content_description,
-                onImageClick = { restart() }
-            )
+                R.drawable.lemon_restart,
+                R.string.lemon_empty_glass,
+                R.string.empty_glass_content_description
+            ) { restart() }
 
             else -> null // Handle unexpected states if needed
         }
