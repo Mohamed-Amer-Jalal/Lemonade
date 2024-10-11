@@ -59,14 +59,13 @@ private fun TopBar() {
 @Composable
 private fun LemonadeScreen(
     modifier: Modifier = Modifier,
-    viewModel: LemonadeViewModel = LemonadeViewModel()
+    viewModel: LemonadeViewModel = LemonadeViewModel(),
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
         modifier = modifier.fillMaxSize()
     ) {
-        // Call the ViewModel function to render the current state
         viewModel.OnLemonadeState()
     }
 }
@@ -82,7 +81,7 @@ fun LemonTextAndImage(
     ) {
         Image(
             painter = painterResource(lemonade.drawableResourceId),
-            contentDescription = stringResource(lemonade.contentDescriptionResourceId),
+            contentDescription = null,
             modifier = Modifier
                 .width(dimensionResource(R.dimen.button_image_width))
                 .height(dimensionResource(R.dimen.button_image_height))

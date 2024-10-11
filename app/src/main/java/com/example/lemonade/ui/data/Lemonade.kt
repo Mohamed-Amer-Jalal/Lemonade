@@ -6,6 +6,5 @@ import androidx.annotation.StringRes
 data class Lemonade(
     @DrawableRes val drawableResourceId: Int,
     @StringRes val textLabelResourceId: Int,
-    @StringRes val contentDescriptionResourceId: Int,
-    val onImageClick: () -> Unit
+    val onImageClick: () -> Unit,
 )
