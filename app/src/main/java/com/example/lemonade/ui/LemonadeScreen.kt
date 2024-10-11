@@ -46,7 +46,7 @@ fun LemonadeApp() {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TopBar() {
+private fun TopBar() {
     CenterAlignedTopAppBar(
         title = { Text(text = "Lemonade", fontWeight = FontWeight.Bold) },
         colors = TopAppBarDefaults.largeTopAppBarColors(
@@ -57,7 +57,7 @@ fun TopBar() {
 }
 
 @Composable
-fun LemonadeScreen(
+private fun LemonadeScreen(
     modifier: Modifier = Modifier,
     viewModel: LemonadeViewModel = LemonadeViewModel()
 ) {
@@ -98,7 +98,7 @@ fun LemonTextAndImage(
 
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
-fun LemonPreview() {
+private fun LemonPreview() {
     LemonadeTheme(darkTheme = false) {
         LemonadeApp()
     }
@@ -106,7 +106,7 @@ fun LemonPreview() {
 
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
-fun LemonPreviewDark() {
+private fun LemonPreviewDark() {
     LemonadeTheme(darkTheme = true) {
         LemonadeApp()
     }

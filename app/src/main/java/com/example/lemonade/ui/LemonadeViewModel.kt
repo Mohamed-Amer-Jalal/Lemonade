@@ -10,22 +10,22 @@ import kotlinx.coroutines.flow.MutableStateFlow
 class LemonadeViewModel : ViewModel() {
     private val _uiState = MutableStateFlow(LemonadeUiState())
 
-    fun pickLemon() {
+    private fun pickLemon() {
         _uiState.value = _uiState.value.copy(currentStep = 2, squeezeCount = (2..4).random())
     }
 
-    fun squeezeLemon() {
+    private fun squeezeLemon() {
         val squeezeCount = _uiState.value.squeezeCount - 1
 
         if (squeezeCount > 0) _uiState.value = _uiState.value.copy(squeezeCount = squeezeCount)
         else _uiState.value = _uiState.value.copy(currentStep = 3)
     }
 
-    fun drinkLemonade() {
+    private fun drinkLemonade() {
         _uiState.value = _uiState.value.copy(currentStep = 4)
     }
 
-    fun restart() {
+    private fun restart() {
         _uiState.value = _uiState.value.copy(currentStep = 1, squeezeCount = 0)
     }
 
