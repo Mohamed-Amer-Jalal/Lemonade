@@ -27,10 +27,9 @@ class LemonadeViewModel : ViewModel() {
                 R.drawable.lemon_squeeze,
                 R.string.lemon_squeeze,
             ) {
-                val squeezeCount = _uiState.value.squeezeCount - 1
+                val squeeze = _uiState.value.squeezeCount - 1
 
-                if (squeezeCount > 0) _uiState.value =
-                    _uiState.value.copy(squeezeCount = squeezeCount)
+                if (squeeze > 0) _uiState.value = _uiState.value.copy(squeezeCount = squeeze)
                 else _uiState.value = _uiState.value.copy(currentStep = 3)
             }
 
