@@ -12,7 +12,6 @@ class LemonadeViewModel : ViewModel() {
 
     @Composable
     fun OnLemonadeState() {
-        // Collecting the current state from the StateFlow
         val lemonadeState = _uiState.collectAsState()
 
         val lemonade = when (lemonadeState.value.currentStep) {
